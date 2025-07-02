@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ticket Booking</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1; 
+    }
+    .booking-form {
+      max-width: 500px;
+      margin: 120px auto 50px;
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .booking-form h2 {
+      margin-bottom: 1em;
+    }
+
+    .booking-form input,
+    .booking-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit;
+    }
+
+    .booking-form button {
+      width: 100%;
+      background-color: #ffd103;
+      color: #111;
+      border: none;
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .booking-form button:hover {
+      background-color: #fce26f;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CENTRAL CINEMA</h1>
+  </header>
+
+  <main>
+    <div class="booking-form">
+      <h2>Book a Ticket</h2>
+      <form action="#">
+        <input 
+          type="text" 
+          placeholder="Full Name" 
+          required 
+          pattern="^[A-Za-zÀ-žżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]+$"
+          title="Please enter letters, spaces, or hyphens only"
+        />
+        <input type="email" placeholder="Email" required />
+        <select id="movie-select" required>
+          <option value="">Select a Movie</option>
+          <option value="spiderman">Spider-Man: No Way Home</option>
+          <option value="it">It</option>
+          <option value="joker">Joker</option>
+        </select>
+        <select id="time-select" required>
+          <option value="">Select Time</option>
+        </select>
+        <input type="number" placeholder="Number of Tickets" min="1" required />
+        <button type="submit">Book Now</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Central Cinema
+  </footer>
+
+  <script>
+    const movieTimes = {
+      spiderman: ["13:00", "16:30", "20:00"],
+      it: ["12:00", "15:00", "18:00"],
+      joker: ["13:30", "16:30", "19:30"]
+    };
+
+    const movieSelect = document.getElementById("movie-select");
+    const timeSelect = document.getElementById("time-select");
+
+    movieSelect.addEventListener("change", () => {
+      const selectedMovie = movieSelect.value;
+      // Clear existing options
+      timeSelect.innerHTML = '<option value="">Select Time</option>';
+      if (movieTimes[selectedMovie]) {
+        movieTimes[selectedMovie].forEach(time => {
+          const option = document.createElement("option");
+          option.value = time;
+          option.textContent = time;
+          timeSelect.appendChild(option);
+        });
+      }
+    });
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+      const nameInput = this.querySelector("input[type='text']");
+      const nameValue = nameInput.value.trim();
+      const nameRegex = /^[A-Za-zÀ-žżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]+$/;
+
+      if (!nameRegex.test(nameValue)) {
+        alert("Full name can contain only letters, spaces, and hyphens.");
+        nameInput.focus();
+        e.preventDefault(); 
+      }
+    });
+  </script>
+</body>
+</html>
