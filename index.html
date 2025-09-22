@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie</title>
+    <title>Cinema</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -23,36 +24,173 @@
   <main>
   <section id="schedule">
     <h2>Current Schedule</h2>
-      <div class="movies">
-<div class="movie">
-  <img src="img/spiderman.avif" alt="Spider-Man">
-  <h3>Spider-Man: No Way Home</h3>
-  <p>Cast: Tom Holland, Zendaya, Benedict Cumberbatch</p>
-  <p>Showtimes: 13:00, 16:30, 20:00</p>
-  <p>Duration: 2h 28min</p>
-</div>
-
-<div class="movie">
-  <img src="img/it.avif" alt="It">
-  <h3>It</h3>
-  <p>Cast: Bill Skarsgård, Jaeden Martell, Finn Wolfhard, Sophia Lillis</p>
-  <p>Showtimes: 12:00, 15:00, 18:00</p>
-  <p>Duration: 2h 15min</p>
-</div>
-
-<div class="movie">
-  <img src="img/jocker.avif" alt="Joker">
-  <h3>Joker</h3>
-  <p>Cast: Joaquin Phoenix, Robert De Niro, Zazie Beetz, Frances Conroy</p>
-  <p>Showtimes: 13:30, 16:30, 19:30</p>
-  <p>Duration: 2h 2min</p> 
-</div>
-
-      </div>
+        <div class="movies">
+            <div class="movie" style="background-image: url('img/spiderman.avif')">
+                <div class="movie-content">
+                    <h3>Spider-Man</h3>
+                    <img class="movie-img" src="img/spiderman.avif" alt="Spider-Man">
+                    <p>Cast: Tom Holland, Zendaya, Benedict Cumberbatch</p>
+                    <div class="movie-info">
+                        <p>Duration: 2h 28min</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.5/10</span>
+                        </div>
+                        <div class="showtimes">
+                            <span class="showtime">13:00</span>
+                            <span class="showtime">16:30</span>
+                            <span class="showtime">20:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="movie" style="background-image: url('img/it.avif')">
+                <div class="movie-content">
+                    <h3>It</h3>
+                    <img class="movie-img" src="img/it.avif">
+                    <p>Cast: Florence Pugh, Henry Cavill, Lupita Nyong'o</p>
+                    <div class="movie-info">
+                        <p>Duration: 2h 15min</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.3/10</span>
+                        </div>
+                        <div class="showtimes">
+                            <span class="showtime">14:15</span>
+                            <span class="showtime">17:45</span>
+                            <span class="showtime">21:15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="movie" style="background-image: url('img/jocker.avif')">
+                <div class="movie-content">
+                    <h3>Jocker</h3>
+                    <img class="movie-img" src="img/jocker.avif">
+                    <p>Cast: Robert Pattinson, Anya Taylor-Joy, Idris Elba</p>
+                    <div class="movie-info">
+                        <p>Duration: 2h 10min</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.7/10</span>
+                        </div>
+                        <div class="showtimes">
+                            <span class="showtime">15:30</span>
+                            <span class="showtime">19:00</span>
+                            <span class="showtime">22:30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+    </div>
+    <div class="scrolling-banner">
+        <div class="scrolling-text" id="scrollingText"></div>
+    </div>
+<section class="ticket-deal">
+  <div class="ticket-overlay">
+    <div class="ticket-content">
+      <h2>Ticket Deal – Special Offer</h2>
+      <p class="ticket-text">Buy your tickets now and get an exclusive bonus!</p>
+
+      <ul class="ticket-list">
+        <li>Buy 2 tickets, get 1 free</li>
+        <li>Free popcorn for the first 100 visitors</li>
+        <li>20% off online tickets until midnight</li>
+      </ul>
+
+      <div class="ticket-timer">
+        Offer ends in: <span id="countdown">00:00:00</span>
+      </div>
+      <script>
+        const countdown = document.getElementById("countdown");
+        let timeLeft = 3600;
+
+        function updateTimer() {
+            const h = String(Math.floor(timeLeft / 3600)).padStart(2, "0");
+            const m = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, "0");
+            const s = String(timeLeft % 60).padStart(2, "0");
+            countdown.textContent = `${h}:${m}:${s}`;
+            if (timeLeft > 0) timeLeft--;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+        </script>
+      <a href="#" class="ticket-btn">Get Your Ticket</a>
+    </div>
+  </div>
+</section>
   </main>
-  <footer>
-    &copy; 2025 Cinema City
-  </footer>
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>CENTRAL CINEMA</h3>
+      <p>Enjoy the latest movies in the best quality.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="order.html">Book Ticket</a></li>
+        <li><a href="login.html">Log In</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contact Us</h4>
+      <p>Email: info@cinema.com</p>
+      <p>Phone: +48 123 456 789</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 CENTRAL CINEMA. All rights reserved.
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Генерация текста
+    const container = document.getElementById('scrollingText');
+    const text = 'ticket deal';
+    const repetitions = 40;
+    const spacing = 40;
+    
+    // Очищаем контейнер перед созданием
+    container.innerHTML = '';
+    
+    for (let i = 0; i < repetitions; i++) {
+        const span = document.createElement('span');
+        span.className = 'text-item';
+        span.textContent = text;
+        span.style.marginRight = spacing + 'px';
+        container.appendChild(span);
+    }
+
+    // Управление анимацией при скролле
+    const banner = document.querySelector('.scrolling-banner');
+    let isScrolling;
+    
+    window.addEventListener('scroll', function() {
+        banner.classList.remove('paused');
+        clearTimeout(isScrolling);
+        isScrolling = setTimeout(function() {
+            banner.classList.add('paused');
+        }, 100);
+    }, false);
+
+    // Инициализируем анимацию как остановленную
+    banner.classList.add('paused');
+});
+</script>
 </body>
 </html>
+
