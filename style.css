@@ -8,10 +8,10 @@ body {
   background-color: #f9f9f9;
   color: #333;
 }
-body h1, h2, h3, h4, h5, h6{
+body h1, h2{
   font-family: "Bebas Neue", sans-serif;
 }
-body p {
+body h3, p {
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -83,89 +83,332 @@ main {
   margin: 60px 0;
 
 }
-
-.movie img {
-  width: 100%;
-  height: 300px;          
-  object-fit: cover;      
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-}
-
-
-
 .movies {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2em;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
   padding: 0 1em;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .movie {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  padding: 1em;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  transition: box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+
+
+/* Размытый фон-копия картинки */
+.movie::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) brightness(0.85);
+  z-index: 0;
+}
+
+/* Плавное затемнение с мягкими градиентами */
+.movie::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+      radial-gradient(ellipse at top, transparent 30%, rgba(0, 0, 0, 0.5) 100%),
+      radial-gradient(ellipse at bottom, transparent 10%, rgba(0, 0, 0, 0.7) 100%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  z-index: 1;
+}
+
+/* Контент поверх */
+.movie-content {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Заголовок */
+.movie h3 {
+  font-size: 1.6rem;
+  color: #ff4081;
+  margin: 15px 10px;
+  font-weight: 700;
+}
+
+/* Картинка */
+.movie-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Текст */
-.movie h3 {
-  font-size: 1.5rem;
-  color: rgb(250, 76, 120);
-  margin: 15px 0 10px;
-  font-weight: 700;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 .movie p {
   font-size: 1rem;
-  color: #333;
-  margin: 6px 0;
-  line-height: 1.4;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  margin: 8px 0;
+  line-height: 1.5;
 }
 
-footer {
-  background-color: #222;
-  color: white;
-  text-align: center;
-  padding: 1.5em 1em;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-  letter-spacing: 0.05em;
-  box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
-  position: relative;
-  bottom: 0;
-  width: 100%;
+.movie-info {
+  margin-top: auto;
+  padding-top: 15px;
 }
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.rating i {
+  color: gold;
+  margin-right: 5px;
+}
+
+.showtimes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.showtime {
+  color: #fff;
+  background: #ff4081;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.showtime:hover {
+  background: #ff5890;
+}
+
+@media (max-width: 768px) {
+  .movies {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+  }
+  
+  h1 {
+      font-size: 2.2rem;
+  }
+}
+
+
+.scrolling-banner {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    background-color: #000000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.scrolling-text {
+    white-space: nowrap;
+    animation: scrollText 15s linear infinite;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.scrolling-banner.paused .scrolling-text {
+    animation-play-state: paused;
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.text-item {
+    display: inline-block;
+    margin-right: 40px;
+}
+
+
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 40px 20px 20px;
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-column {
+  flex: 1 1 250px;
+  margin: 10px;
+}
+
+.footer h3 {
+  color: #ffd103;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.footer h4 {
+  color: #ffd103;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.footer p, 
+.footer li, 
+.footer a {
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  line-height: 1.6;
+}
+
+.footer a:hover {
+  color: #ffd103;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.social-icons {
+  margin-top: 10px;
+}
+
+.social-icons a {
+  color: #ffd103;
+  font-size: 1.3rem;
+  margin-right: 15px;
+  transition: color 0.3s;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: white;
+  border-top: 1px solid #333;
+  margin-top: 20px;
+}
+
 
 @media (max-width: 480px) {
-  .movie img {
-    height: 200px;   /* чуть ниже, чтобы не занимать слишком много места */
-  }
+    .movie img {
+        height: 200px;   /* чуть ниже, чтобы не занимать слишком много места */
+    }
 
-  .movie h3 {
-    font-size: 1.2rem;
-  }
+    .movie h3 {
+        font-size: 1.2rem;
+    }
 
-  .movie p {
-    font-size: 0.9rem;
-  }
+    .movie p {
+        font-size: 0.9rem;
+    }
 
-  main {
-    padding: 1em 0.5em;
-  }
-  footer {
-    font-size: 12px;
-    padding: 1em 0.5em;
-  }
+    main {
+        padding: 1em 0.5em;
+    }
+    
+    .scrolling-banner {
+        height: 25px;
+    }
+    
+    .scrolling-text {
+        font-size: 12px;
+    }
+    
+    .text-item {
+        margin-right: 30px;
+    }
+}
+.ticket-deal {
+  position: relative;
+  text-align: center;
+  display: flex;
+  background-image: url("img/ff835cb97dd324755938957712a24f52.jpg");
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: black;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
 }
 
+.ticket-content h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  margin: 30px;
+  color: white;
+}
+
+.ticket-content p, li {
+  font-family: Arial, sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: white;
+}
+
+.ticket-timer {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: white;
+  margin: 30px;
+}
+
+.ticket-btn {
+  border: solid 2px white;
+  color: white;
+  font-size: 25px;
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  text-decoration: none;
+    margin-bottom: 40px;
+}
+
+.ticket-btn:hover {
+  background-color: white;
+  color: #000;
+}
 
